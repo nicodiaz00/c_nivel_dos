@@ -38,6 +38,8 @@ namespace presentacion
             ArticuloNegocio negocio = new ArticuloNegocio();
             listaArticulo = negocio.listarArticulo();
             dgvArticulos.DataSource = listaArticulo;
+            dgvArticulos.Columns["UrlImagen"].Visible = false; 
+            dgvArticulos.Columns["Id"].Visible = false; //oculto columna id
             cargarImagen(listaArticulo[0].UrlImagen);
         }
 
@@ -46,6 +48,13 @@ namespace presentacion
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             cargarImagen(seleccionado.UrlImagen);
             
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregarArticulo nuevoArticulo = new frmAgregarArticulo();
+            nuevoArticulo.ShowDialog();
+
         }
     }
 }

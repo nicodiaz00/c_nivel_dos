@@ -17,16 +17,26 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select A.Codigo, A.Nombre,A.Descripcion, A.ImagenUrl from ARTICULOS A");
+                datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion as Marca, C.Descripcion as Categoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
                 {
                     Articulo articuloAuxiliar = new Articulo();
+                    articuloAuxiliar.Id = (int)datos.Lector["Id"];
                     articuloAuxiliar.CodigoArticulo = (string)datos.Lector["Codigo"];
                     articuloAuxiliar.Nombre = (string)datos.Lector["Nombre"];
                     articuloAuxiliar.Descripcion = (string)datos.Lector["Descripcion"];
                     articuloAuxiliar.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    decimal precio = (decimal)datos.Lector["Precio"];
+                    decimal precioRedondeado = (Math.Round(precio, 0));
+                    articuloAuxiliar.Precio = precioRedondeado;
+                    articuloAuxiliar.Marca = new Marca();
+                    articuloAuxiliar.Marca.DescripcionMarca = (string)datos.Lector["Marca"];
+
+                    articuloAuxiliar.Categoria = new Categoria();
+                    articuloAuxiliar.Categoria.DescripcionCategoria = (string)datos.Lector["Categoria"];
+
 
                     lista.Add(articuloAuxiliar);
                 }
@@ -46,6 +56,29 @@ namespace negocio
             
             
 
+        }
+        public void agregarArticulo(Articulo articuloNuevo)
+        {
+            AccesoDatos conexionDatos = new AccesoDatos();
+            try
+            {
+                conexionDatos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion) values(@Codigo,@Nombre,@Descripcion)");
+                conexionDatos.setParametro("@Codigo", articuloNuevo.CodigoArticulo);
+                conexionDatos.setParametro("@Nombre", articuloNuevo.Nombre);
+                conexionDatos.setParametro("@Descripcion", articuloNuevo.Descripcion);
+
+                conexionDatos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conexionDatos.cerrarConexion();
+            }
         }
 
     }

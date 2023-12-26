@@ -8,6 +8,7 @@ namespace dominio
 {
     public class Articulo
     {
+        public int Id { get; set; }
         public string CodigoArticulo { get; set; }
 
         public string Nombre { get; set; }
@@ -16,5 +17,10 @@ namespace dominio
 
         public string UrlImagen { get; set; }
 
+        public decimal Precio { get; set; }
+
+        public Marca  Marca { get; set; }
+
+        public Categoria Categoria { get; set; } 
     }
 }
