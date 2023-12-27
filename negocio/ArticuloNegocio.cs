@@ -54,7 +54,7 @@ namespace negocio
 
 
             
-            
+   
 
         }
         public void agregarArticulo(Articulo articuloNuevo)
@@ -62,10 +62,12 @@ namespace negocio
             AccesoDatos conexionDatos = new AccesoDatos();
             try
             {
-                conexionDatos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion) values(@Codigo,@Nombre,@Descripcion)");
+                conexionDatos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria) values(@Codigo,@Nombre,@Descripcion,@idMarca,@idCategoria)");
                 conexionDatos.setParametro("@Codigo", articuloNuevo.CodigoArticulo);
                 conexionDatos.setParametro("@Nombre", articuloNuevo.Nombre);
                 conexionDatos.setParametro("@Descripcion", articuloNuevo.Descripcion);
+                conexionDatos.setParametro("@idMarca", articuloNuevo.Marca.Id);
+                conexionDatos.setParametro("@idCategoria", articuloNuevo.Categoria.Id);
 
                 conexionDatos.ejecutarAccion();
 
