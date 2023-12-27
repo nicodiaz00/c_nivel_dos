@@ -28,6 +28,8 @@ namespace presentacion
                 articuloNuevo.CodigoArticulo = txtCodigo.Text;
                 articuloNuevo.Nombre = txtNombre.Text;
                 articuloNuevo.Descripcion = txtDescripcion.Text;
+                articuloNuevo.Marca = (Marca)cboMarca.SelectedItem;
+                articuloNuevo.Categoria = (Categoria)cboCategoria.SelectedItem;
 
                 conexionNegocio.agregarArticulo(articuloNuevo);
                 MessageBox.Show("Articulo agregado exitosamente");
@@ -38,6 +40,28 @@ namespace presentacion
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void frmAgregarArticulo_Load(object sender, EventArgs e)
+        {
+            MarcaNegocio varMarcaNegocio = new MarcaNegocio();
+            CategoriaNegocio varCategoriaNegocio = new CategoriaNegocio();
+            try
+            {
+                cboMarca.DataSource = varMarcaNegocio.listarMarca();
+                cboCategoria.DataSource = varCategoriaNegocio.listarCategoria();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
