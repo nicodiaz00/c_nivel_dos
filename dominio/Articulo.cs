@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace dominio
 
         public string Nombre { get; set; }
 
+        [DisplayName("Descripcíon")]
         public string Descripcion { get; set; }
 
         public string UrlImagen { get; set; }
@@ -21,6 +23,7 @@ namespace dominio
 
         public Marca  Marca { get; set; }
 
+        [DisplayName("Categoría")]
         public Categoria Categoria { get; set; } 
     }
 }

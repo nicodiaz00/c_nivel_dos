@@ -27,7 +27,10 @@ namespace negocio
                     articuloAuxiliar.CodigoArticulo = (string)datos.Lector["Codigo"];
                     articuloAuxiliar.Nombre = (string)datos.Lector["Nombre"];
                     articuloAuxiliar.Descripcion = (string)datos.Lector["Descripcion"];
-                    articuloAuxiliar.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                    {
+                        articuloAuxiliar.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    }
                     decimal precio = (decimal)datos.Lector["Precio"];
                     decimal precioRedondeado = (Math.Round(precio, 0));
                     articuloAuxiliar.Precio = precioRedondeado;
@@ -44,9 +47,10 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
+                
                 throw ex;
             }
+            
             finally
             {
                 datos.cerrarConexion();
@@ -62,12 +66,14 @@ namespace negocio
             AccesoDatos conexionDatos = new AccesoDatos();
             try
             {
-                conexionDatos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria) values(@Codigo,@Nombre,@Descripcion,@idMarca,@idCategoria)");
+                conexionDatos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria,Precio,ImagenUrl) values(@Codigo,@Nombre,@Descripcion,@idMarca,@idCategoria,@Precio,@ImagenUrl)");
                 conexionDatos.setParametro("@Codigo", articuloNuevo.CodigoArticulo);
                 conexionDatos.setParametro("@Nombre", articuloNuevo.Nombre);
                 conexionDatos.setParametro("@Descripcion", articuloNuevo.Descripcion);
                 conexionDatos.setParametro("@idMarca", articuloNuevo.Marca.Id);
                 conexionDatos.setParametro("@idCategoria", articuloNuevo.Categoria.Id);
+                conexionDatos.setParametro("@Precio", articuloNuevo.Precio);
+                conexionDatos.setParametro("@ImagenUrl", articuloNuevo.UrlImagen);
 
                 conexionDatos.ejecutarAccion();
 

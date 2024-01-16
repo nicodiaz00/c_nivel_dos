@@ -35,13 +35,9 @@ namespace presentacion
         }
         private void frmVentanaPrincipal_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulo = negocio.listarArticulo();
-            dgvArticulos.DataSource = listaArticulo;
-            dgvArticulos.Columns["UrlImagen"].Visible = false; 
-            dgvArticulos.Columns["Id"].Visible = false; //oculto columna id
-            cargarImagen(listaArticulo[0].UrlImagen);
+            cargarLista();
         }
+
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
@@ -54,7 +50,28 @@ namespace presentacion
         {
             frmAgregarArticulo nuevoArticulo = new frmAgregarArticulo();
             nuevoArticulo.ShowDialog();
+            cargarLista();
+            
 
         }
+        private void cargarLista()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+
+                listaArticulo = negocio.listarArticulo();
+                dgvArticulos.DataSource = listaArticulo;
+                dgvArticulos.Columns["UrlImagen"].Visible = false;
+                dgvArticulos.Columns["Id"].Visible = false; //oculto columna id
+                cargarImagen(listaArticulo[0].UrlImagen);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        
     }
 }

@@ -30,6 +30,8 @@ namespace presentacion
                 articuloNuevo.Descripcion = txtDescripcion.Text;
                 articuloNuevo.Marca = (Marca)cboMarca.SelectedItem;
                 articuloNuevo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                articuloNuevo.Precio = decimal.Parse(txtPrecio.Text);
+                articuloNuevo.UrlImagen = txtImagen.Text;
 
                 conexionNegocio.agregarArticulo(articuloNuevo);
                 MessageBox.Show("Articulo agregado exitosamente");
@@ -62,6 +64,23 @@ namespace presentacion
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtImagen.Text);
+        }
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pcbCargarImagen.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+
+                pcbCargarImagen.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png");
+            }
         }
     }
 }
