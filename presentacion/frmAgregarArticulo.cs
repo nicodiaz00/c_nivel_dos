@@ -14,9 +14,15 @@ namespace presentacion
 {
     public partial class frmAgregarArticulo : Form
     {
+        private Articulo articulo = null;
         public frmAgregarArticulo()
         {
             InitializeComponent();
+        }
+        public frmAgregarArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -51,7 +57,24 @@ namespace presentacion
             try
             {
                 cboMarca.DataSource = varMarcaNegocio.listarMarca();
+                cboMarca.ValueMember = "Id";
+                cboMarca.DisplayMember = "DescripcionMarca";
                 cboCategoria.DataSource = varCategoriaNegocio.listarCategoria();
+                cboCategoria.ValueMember = "Id";
+                cboCategoria.DisplayMember = "DescripcionCategoria";
+
+                if(articulo !=null)
+                {
+                    txtCodigo.Text = articulo.CodigoArticulo;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text= articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtImagen.Text = articulo.UrlImagen;
+                    cargarImagen(articulo.UrlImagen);
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+
+                }
 
             }
             catch (Exception ex)

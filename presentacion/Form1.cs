@@ -72,6 +72,14 @@ namespace presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
-        
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo articuloSeleccionado;
+            articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAgregarArticulo articuloModificado = new frmAgregarArticulo(articuloSeleccionado);
+            articuloModificado.ShowDialog();
+            cargarLista();
+        }
     }
 }
