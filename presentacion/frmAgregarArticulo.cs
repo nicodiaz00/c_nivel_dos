@@ -23,6 +23,7 @@ namespace presentacion
         {
             InitializeComponent();
             this.articulo = articulo;
+            Text = "Modificar Articulo";
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

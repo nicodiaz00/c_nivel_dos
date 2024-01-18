@@ -17,7 +17,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion as Marca, C.Descripcion as Categoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
+                datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion as Marca, C.Descripcion as Categoria, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
@@ -35,9 +35,11 @@ namespace negocio
                     decimal precioRedondeado = (Math.Round(precio, 0));
                     articuloAuxiliar.Precio = precioRedondeado;
                     articuloAuxiliar.Marca = new Marca();
+                    articuloAuxiliar.Marca.Id = (int)datos.Lector["IdMarca"];
                     articuloAuxiliar.Marca.DescripcionMarca = (string)datos.Lector["Marca"];
 
                     articuloAuxiliar.Categoria = new Categoria();
+                    articuloAuxiliar.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     articuloAuxiliar.Categoria.DescripcionCategoria = (string)datos.Lector["Categoria"];
 
 
