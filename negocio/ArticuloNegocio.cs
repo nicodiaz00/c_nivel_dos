@@ -117,6 +117,21 @@ namespace negocio
                 conexDatos.cerrarConexion();
             }
         }
+        public void eliminarArticulo(int idArticulo) {
+            try
+            {
+                AccesoDatos conexionADatos = new AccesoDatos();
+                conexionADatos.setearConsulta("delete from ARTICULOS where Id= @id");
+                conexionADatos.setParametro("@id",idArticulo);
+                conexionADatos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
     }
 }

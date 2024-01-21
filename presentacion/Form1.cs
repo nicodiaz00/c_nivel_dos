@@ -30,7 +30,7 @@ namespace presentacion
             catch (Exception ex)
             {
 
-                pictureBoxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png");
+                pictureBoxArticulo.Load("https://i.postimg.cc/52mdzCM6/No-Image-Placeholder-svg.png");
             }
         }
         private void frmVentanaPrincipal_Load(object sender, EventArgs e)
@@ -80,6 +80,29 @@ namespace presentacion
             frmAgregarArticulo articuloModificado = new frmAgregarArticulo(articuloSeleccionado);
             articuloModificado.ShowDialog();
             cargarLista();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio articuloNeg = new ArticuloNegocio();
+            Articulo articuloSeleccionado;
+            try
+            {
+                DialogResult respuestaEliminacion = MessageBox.Show("Eliminar definitivamente?", "Eliminando",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                if(respuestaEliminacion == DialogResult.Yes)
+                {
+                    articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    articuloNeg.eliminarArticulo(articuloSeleccionado.Id);
+                    MessageBox.Show("Articulo eliminado");
+                    cargarLista();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
