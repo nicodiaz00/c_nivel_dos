@@ -28,20 +28,36 @@ namespace presentacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo articuloNuevo = new Articulo();
+            //Articulo articuloNuevo = new Articulo();
             ArticuloNegocio conexionNegocio = new ArticuloNegocio();
             try
             {
-                articuloNuevo.CodigoArticulo = txtCodigo.Text;
-                articuloNuevo.Nombre = txtNombre.Text;
-                articuloNuevo.Descripcion = txtDescripcion.Text;
-                articuloNuevo.Marca = (Marca)cboMarca.SelectedItem;
-                articuloNuevo.Categoria = (Categoria)cboCategoria.SelectedItem;
-                articuloNuevo.Precio = decimal.Parse(txtPrecio.Text);
-                articuloNuevo.UrlImagen = txtImagen.Text;
+                if(articulo == null)
+                {
+                    articulo = new Articulo();
+                }
 
-                conexionNegocio.agregarArticulo(articuloNuevo);
-                MessageBox.Show("Articulo agregado exitosamente");
+
+                    articulo.CodigoArticulo = txtCodigo.Text;
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.Marca = (Marca)cboMarca.SelectedItem;
+                    articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                    articulo.Precio = decimal.Parse(txtPrecio.Text);
+                    articulo.UrlImagen = txtImagen.Text;
+
+                    
+
+                if (articulo.Id != 0)
+                {
+                    conexionNegocio.modificarArticulo(articulo);
+                    MessageBox.Show("Articulo modificado exitosamente");
+                }
+                else
+                {
+                    conexionNegocio.agregarArticulo(articulo);
+                    MessageBox.Show("Articulo agregado exitosamente");
+                }
                 Close();
             }
             catch (Exception ex)

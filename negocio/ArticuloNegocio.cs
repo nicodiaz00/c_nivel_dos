@@ -90,6 +90,33 @@ namespace negocio
                 conexionDatos.cerrarConexion();
             }
         }
+        public void modificarArticulo(Articulo articuloModificado)
+        {
+            AccesoDatos conexDatos = new AccesoDatos();
+            try
+            {
+                conexDatos.setearConsulta("update ARTICULOS set Codigo =@codigo, Nombre=@nombre, Descripcion =@descripcion,IdMarca =@idMarca,IdCategoria=@idCategoria,ImagenUrl=@imagenUrl,Precio =@precio where Id =@id");
+                conexDatos.setParametro("@codigo",articuloModificado.CodigoArticulo);
+                conexDatos.setParametro("@nombre", articuloModificado.Nombre);
+                conexDatos.setParametro("@descripcion", articuloModificado.Descripcion);
+                conexDatos.setParametro("@idMarca", articuloModificado.Marca.Id);
+                conexDatos.setParametro("idCategoria", articuloModificado.Categoria.Id);
+                conexDatos.setParametro("@imagenUrl", articuloModificado.UrlImagen);
+                conexDatos.setParametro("@precio", articuloModificado.Precio);
+                conexDatos.setParametro("@id", articuloModificado.Id);
+
+                conexDatos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexDatos.cerrarConexion();
+            }
+        }
 
     }
 }
