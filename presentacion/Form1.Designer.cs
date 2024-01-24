@@ -180,6 +180,7 @@
             this.cboCriterio.Name = "cboCriterio";
             this.cboCriterio.Size = new System.Drawing.Size(85, 21);
             this.cboCriterio.TabIndex = 3;
+            
             // 
             // lblCriterio
             // 

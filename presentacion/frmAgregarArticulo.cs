@@ -25,6 +25,31 @@ namespace presentacion
             this.articulo = articulo;
             Text = "Modificar Articulo";
         }
+        //funcion validaciones
+        public void validarPrecio(KeyPressEventArgs tecla)
+        {
+            
+            if (char.IsDigit(tecla.KeyChar))
+            {
+                tecla.Handled = false;
+            }
+            else if (char.IsSeparator(tecla.KeyChar))
+            {
+                tecla.Handled = false;
+            }
+            else if (char.IsControl(tecla.KeyChar))
+            {
+                tecla.Handled = false;
+            }
+            else 
+            {
+                tecla.Handled = true;
+                MessageBox.Show("Ingrese solo números");
+                
+            }
+            
+        }
+       
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -36,8 +61,6 @@ namespace presentacion
                 {
                     articulo = new Articulo();
                 }
-
-
                     articulo.CodigoArticulo = txtCodigo.Text;
                     articulo.Nombre = txtNombre.Text;
                     articulo.Descripcion = txtDescripcion.Text;
@@ -45,6 +68,9 @@ namespace presentacion
                     articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                     articulo.Precio = decimal.Parse(txtPrecio.Text);
                     articulo.UrlImagen = txtImagen.Text;
+                
+
+                    
 
                     
 
@@ -121,6 +147,13 @@ namespace presentacion
 
                 pcbCargarImagen.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png");
             }
+        }
+
+        
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarPrecio(e);
         }
     }
 }

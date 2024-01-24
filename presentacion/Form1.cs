@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using negocio;
+using System.Runtime.CompilerServices;
 
 
 namespace presentacion
@@ -25,6 +26,9 @@ namespace presentacion
             dgvArticulos.Columns["UrlImagen"].Visible = false;
             dgvArticulos.Columns["Id"].Visible = false; //oculto columna id
         }
+        //probando funciones de validacion
+        
+        
         public void busquedaArticulo()
         {
             List<Articulo> listaArticuloFiltro;
@@ -62,6 +66,8 @@ namespace presentacion
             cboCampo.Items.Add("Codigo");
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Precio");
+           
+            
         }
 
 
@@ -147,6 +153,7 @@ namespace presentacion
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string seleccionado = cboCampo.SelectedItem.ToString();
+            
             if(seleccionado == "Codigo")
             {
                 cboCriterio.Items.Clear();
@@ -170,17 +177,29 @@ namespace presentacion
                 cboCriterio.Items.Add("Igual a");
             }
         }
+        
 
         private void btnBusquedaAvanzada_Click(object sender, EventArgs e)
         {
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             try
             {
-                string campo = cboCampo.SelectedItem.ToString();
-                string criterio = cboCriterio.SelectedItem.ToString();
-                string filtroBusqueda = txtAvanzado.Text;
+                if(cboCampo.SelectedIndex == -1 && cboCriterio.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Ingrese Campo y criterio");
+                    
+                }
+                else
+                {
+                    string campo = cboCampo.SelectedItem.ToString();
+                    string criterio = cboCriterio.SelectedItem.ToString();
+                    string filtroBusqueda = txtAvanzado.Text;
 
-                dgvArticulos.DataSource = articuloNegocio.filtrarArticulo(campo, criterio, filtroBusqueda);
+                    dgvArticulos.DataSource = articuloNegocio.filtrarArticulo(campo, criterio, filtroBusqueda);
+                    
+                }
+                
+                
             }
             catch (Exception ex)
             {
@@ -189,5 +208,8 @@ namespace presentacion
             }
             
         }
+        
+
+
     }
 }
