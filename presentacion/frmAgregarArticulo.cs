@@ -44,13 +44,24 @@ namespace presentacion
             else 
             {
                 tecla.Handled = true;
-                MessageBox.Show("Ingrese solo números");
-                
+                   
             }
             
         }
-       
-
+        public void soloTextoYNumeroYEspacio(KeyPressEventArgs tecla)
+        {
+            if (!char.IsControl(tecla.KeyChar) && !char.IsLetterOrDigit(tecla.KeyChar) && tecla.KeyChar != ' ')
+            {
+                tecla.Handled = true;
+            }
+        }
+        public void soloTextoNumero(KeyPressEventArgs tecla)
+        {
+            if(!char.IsControl(tecla.KeyChar)&& !char.IsLetterOrDigit(tecla.KeyChar))
+            {
+                tecla.Handled = true;
+            }
+        }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             //Articulo articuloNuevo = new Articulo();
@@ -61,30 +72,55 @@ namespace presentacion
                 {
                     articulo = new Articulo();
                 }
+                
                     articulo.CodigoArticulo = txtCodigo.Text;
                     articulo.Nombre = txtNombre.Text;
                     articulo.Descripcion = txtDescripcion.Text;
                     articulo.Marca = (Marca)cboMarca.SelectedItem;
                     articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                if(txtPrecio.Text !="")
+                {
                     articulo.Precio = decimal.Parse(txtPrecio.Text);
+
+
+
+                }
+                    
                     articulo.UrlImagen = txtImagen.Text;
+
+                bool datosVacios = false;
+
+                if(txtCodigo.Text == "" || txtNombre.Text == "" || txtDescripcion.Text == "" || txtPrecio.Text == "")
+                {
+                    datosVacios = true;
+                }
+                if(datosVacios == true)
+                {
+                    MessageBox.Show("Debe ingresar Codigo, Nombre, Descripcion y Precio");
+                }
+                else
+                {
+                    if (articulo.Id != 0)
+                    {
+                        conexionNegocio.modificarArticulo(articulo);
+                        MessageBox.Show("Articulo modificado exitosamente");
+                    }
+                    else
+                    {
+                        conexionNegocio.agregarArticulo(articulo);
+                        MessageBox.Show("Articulo agregado exitosamente");
+                    }
+                    Close();
+                }
+                    
+                
                 
 
                     
 
                     
 
-                if (articulo.Id != 0)
-                {
-                    conexionNegocio.modificarArticulo(articulo);
-                    MessageBox.Show("Articulo modificado exitosamente");
-                }
-                else
-                {
-                    conexionNegocio.agregarArticulo(articulo);
-                    MessageBox.Show("Articulo agregado exitosamente");
-                }
-                Close();
+                
             }
             catch (Exception ex)
             {
@@ -144,7 +180,7 @@ namespace presentacion
             }
             catch (Exception ex)
             {
-
+                
                 pcbCargarImagen.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png");
             }
         }
@@ -154,6 +190,21 @@ namespace presentacion
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarPrecio(e);
+        }
+
+        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            soloTextoNumero(e);
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            soloTextoYNumeroYEspacio(e);
+        }
+
+        private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            soloTextoYNumeroYEspacio(e);
         }
     }
 }

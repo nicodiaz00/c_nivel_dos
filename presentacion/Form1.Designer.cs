@@ -162,6 +162,7 @@
             this.txtAvanzado.Name = "txtAvanzado";
             this.txtAvanzado.Size = new System.Drawing.Size(76, 20);
             this.txtAvanzado.TabIndex = 5;
+            this.txtAvanzado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAvanzado_KeyPress);
             // 
             // lblFiltroAvanzado
             // 
@@ -180,7 +181,6 @@
             this.cboCriterio.Name = "cboCriterio";
             this.cboCriterio.Size = new System.Drawing.Size(85, 21);
             this.cboCriterio.TabIndex = 3;
-            
             // 
             // lblCriterio
             // 

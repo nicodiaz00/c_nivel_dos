@@ -66,8 +66,10 @@ namespace presentacion
             cboCampo.Items.Add("Codigo");
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Precio");
-           
+
             
+
+
         }
 
 
@@ -88,14 +90,12 @@ namespace presentacion
             nuevoArticulo.ShowDialog();
             cargarLista();
             
-
         }
         private void cargarLista()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-
                 listaArticulo = negocio.listarArticulo();
                 dgvArticulos.DataSource = listaArticulo;
                 ocultarColumnas();
@@ -103,11 +103,9 @@ namespace presentacion
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Articulo articuloSeleccionado;
@@ -116,7 +114,6 @@ namespace presentacion
             articuloModificado.ShowDialog();
             cargarLista();
         }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio articuloNeg = new ArticuloNegocio();
@@ -139,17 +136,14 @@ namespace presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             busquedaArticulo();
         }
-
         private void txtFiltroBusqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
             busquedaArticulo();
         }
-
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string seleccionado = cboCampo.SelectedItem.ToString();
@@ -160,6 +154,7 @@ namespace presentacion
                 cboCriterio.Items.Add("Contiene");
                 cboCriterio.Items.Add("Empieza con");
                 cboCriterio.Items.Add("Termina con");
+                txtAvanzado.Text = string.Empty;
 
 
             }else if(seleccionado == "Nombre")
@@ -168,6 +163,7 @@ namespace presentacion
                 cboCriterio.Items.Add("Contiene");
                 cboCriterio.Items.Add("Empieza");
                 cboCriterio.Items.Add("Termina");
+                txtAvanzado.Text = string.Empty;
             }
             else
             {
@@ -175,10 +171,10 @@ namespace presentacion
                 cboCriterio.Items.Add("Mayor a");
                 cboCriterio.Items.Add("Menor a");
                 cboCriterio.Items.Add("Igual a");
+                txtAvanzado.Text = string.Empty;
             }
-        }
-        
-
+            
+        }   
         private void btnBusquedaAvanzada_Click(object sender, EventArgs e)
         {
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
@@ -189,27 +185,49 @@ namespace presentacion
                     MessageBox.Show("Ingrese Campo y criterio");
                     
                 }
+                 else if(cboCampo.SelectedItem.ToString()== "Precio" && txtAvanzado.Text == "")
+                {                  
+                        MessageBox.Show("Ingrese valor numerico");
+                    
+                }else if(cboCampo.SelectedIndex !=-1 && cboCriterio.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Debe ingresar criterio");
+                }
                 else
                 {
                     string campo = cboCampo.SelectedItem.ToString();
                     string criterio = cboCriterio.SelectedItem.ToString();
                     string filtroBusqueda = txtAvanzado.Text;
 
-                    dgvArticulos.DataSource = articuloNegocio.filtrarArticulo(campo, criterio, filtroBusqueda);
-                    
-                }
-                
-                
+                    dgvArticulos.DataSource = articuloNegocio.filtrarArticulo(campo, criterio, filtroBusqueda);                  
+                }                         
             }
             catch (Exception ex)
             {
-
                 throw ex;
+            }           
+        }
+        private void txtAvanzado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cboCampo.SelectedIndex < 0 && cboCriterio.SelectedIndex< 0) {
+                MessageBox.Show("elija campo y criterio antes");
+                
+            }
+            else if (cboCampo.SelectedItem.ToString() == "Precio")
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+                
+            }else if(cboCampo.SelectedItem.ToString() == "Nombre" || cboCampo.SelectedItem.ToString() == "Codigo")
+            {
+                if(!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
             }
             
         }
-        
-
-
     }
 }
