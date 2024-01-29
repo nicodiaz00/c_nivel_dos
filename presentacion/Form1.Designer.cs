@@ -36,7 +36,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.txtFiltroBusqueda = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gBoxBusqueda = new System.Windows.Forms.GroupBox();
             this.btnBusquedaAvanzada = new System.Windows.Forms.Button();
             this.txtAvanzado = new System.Windows.Forms.TextBox();
             this.lblFiltroAvanzado = new System.Windows.Forms.Label();
@@ -44,9 +44,23 @@
             this.lblCriterio = new System.Windows.Forms.Label();
             this.cboCampo = new System.Windows.Forms.ComboBox();
             this.lblCampo = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.gboxDetalle = new System.Windows.Forms.GroupBox();
+            this.lblCodigo = new System.Windows.Forms.Label();
+            this.lblMarca = new System.Windows.Forms.Label();
+            this.lblCategoria = new System.Windows.Forms.Label();
+            this.lblPrecio = new System.Windows.Forms.Label();
+            this.labelNombre = new System.Windows.Forms.Label();
+            this.labelCodigo = new System.Windows.Forms.Label();
+            this.labelMarca = new System.Windows.Forms.Label();
+            this.labelCategoria = new System.Windows.Forms.Label();
+            this.labelPrecio = new System.Windows.Forms.Label();
+            this.lblDescripcion = new System.Windows.Forms.Label();
+            this.labelDescripcion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticulo)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gBoxBusqueda.SuspendLayout();
+            this.gboxDetalle.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvArticulos
@@ -73,7 +87,7 @@
             // btnAgregar
             // 
             this.btnAgregar.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnAgregar.Location = new System.Drawing.Point(13, 336);
+            this.btnAgregar.Location = new System.Drawing.Point(13, 321);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(107, 38);
             this.btnAgregar.TabIndex = 2;
@@ -84,7 +98,7 @@
             // btnModificar
             // 
             this.btnModificar.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnModificar.Location = new System.Drawing.Point(126, 336);
+            this.btnModificar.Location = new System.Drawing.Point(126, 321);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(107, 38);
             this.btnModificar.TabIndex = 3;
@@ -95,7 +109,7 @@
             // btnEliminar
             // 
             this.btnEliminar.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnEliminar.Location = new System.Drawing.Point(239, 336);
+            this.btnEliminar.Location = new System.Drawing.Point(239, 321);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(107, 38);
             this.btnEliminar.TabIndex = 4;
@@ -130,21 +144,21 @@
             this.txtFiltroBusqueda.TabIndex = 0;
             this.txtFiltroBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltroBusqueda_KeyPress);
             // 
-            // groupBox1
+            // gBoxBusqueda
             // 
-            this.groupBox1.Controls.Add(this.btnBusquedaAvanzada);
-            this.groupBox1.Controls.Add(this.txtAvanzado);
-            this.groupBox1.Controls.Add(this.lblFiltroAvanzado);
-            this.groupBox1.Controls.Add(this.cboCriterio);
-            this.groupBox1.Controls.Add(this.lblCriterio);
-            this.groupBox1.Controls.Add(this.cboCampo);
-            this.groupBox1.Controls.Add(this.lblCampo);
-            this.groupBox1.Location = new System.Drawing.Point(386, 336);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(568, 64);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Busqueda avanzada";
+            this.gBoxBusqueda.Controls.Add(this.btnBusquedaAvanzada);
+            this.gBoxBusqueda.Controls.Add(this.txtAvanzado);
+            this.gBoxBusqueda.Controls.Add(this.lblFiltroAvanzado);
+            this.gBoxBusqueda.Controls.Add(this.cboCriterio);
+            this.gBoxBusqueda.Controls.Add(this.lblCriterio);
+            this.gBoxBusqueda.Controls.Add(this.cboCampo);
+            this.gBoxBusqueda.Controls.Add(this.lblCampo);
+            this.gBoxBusqueda.Location = new System.Drawing.Point(386, 321);
+            this.gBoxBusqueda.Name = "gBoxBusqueda";
+            this.gBoxBusqueda.Size = new System.Drawing.Size(568, 64);
+            this.gBoxBusqueda.TabIndex = 7;
+            this.gBoxBusqueda.TabStop = false;
+            this.gBoxBusqueda.Text = "Busqueda avanzada";
             // 
             // btnBusquedaAvanzada
             // 
@@ -210,12 +224,136 @@
             this.lblCampo.TabIndex = 0;
             this.lblCampo.Text = "Campo:";
             // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(6, 29);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(47, 13);
+            this.lblNombre.TabIndex = 8;
+            this.lblNombre.Text = "Nombre:";
+            // 
+            // gboxDetalle
+            // 
+            this.gboxDetalle.Controls.Add(this.labelDescripcion);
+            this.gboxDetalle.Controls.Add(this.lblDescripcion);
+            this.gboxDetalle.Controls.Add(this.labelPrecio);
+            this.gboxDetalle.Controls.Add(this.labelCategoria);
+            this.gboxDetalle.Controls.Add(this.labelMarca);
+            this.gboxDetalle.Controls.Add(this.labelCodigo);
+            this.gboxDetalle.Controls.Add(this.labelNombre);
+            this.gboxDetalle.Controls.Add(this.lblPrecio);
+            this.gboxDetalle.Controls.Add(this.lblCategoria);
+            this.gboxDetalle.Controls.Add(this.lblMarca);
+            this.gboxDetalle.Controls.Add(this.lblCodigo);
+            this.gboxDetalle.Controls.Add(this.lblNombre);
+            this.gboxDetalle.Location = new System.Drawing.Point(386, 391);
+            this.gboxDetalle.Name = "gboxDetalle";
+            this.gboxDetalle.Size = new System.Drawing.Size(568, 149);
+            this.gboxDetalle.TabIndex = 9;
+            this.gboxDetalle.TabStop = false;
+            this.gboxDetalle.Text = "Detalle:";
+            // 
+            // lblCodigo
+            // 
+            this.lblCodigo.AutoSize = true;
+            this.lblCodigo.Location = new System.Drawing.Point(6, 51);
+            this.lblCodigo.Name = "lblCodigo";
+            this.lblCodigo.Size = new System.Drawing.Size(43, 13);
+            this.lblCodigo.TabIndex = 9;
+            this.lblCodigo.Text = "Codigo:";
+            // 
+            // lblMarca
+            // 
+            this.lblMarca.AutoSize = true;
+            this.lblMarca.Location = new System.Drawing.Point(6, 74);
+            this.lblMarca.Name = "lblMarca";
+            this.lblMarca.Size = new System.Drawing.Size(40, 13);
+            this.lblMarca.TabIndex = 10;
+            this.lblMarca.Text = "Marca:";
+            // 
+            // lblCategoria
+            // 
+            this.lblCategoria.AutoSize = true;
+            this.lblCategoria.Location = new System.Drawing.Point(6, 97);
+            this.lblCategoria.Name = "lblCategoria";
+            this.lblCategoria.Size = new System.Drawing.Size(55, 13);
+            this.lblCategoria.TabIndex = 11;
+            this.lblCategoria.Text = "Categoria:";
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(6, 122);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
+            this.lblPrecio.TabIndex = 12;
+            this.lblPrecio.Text = "Precio:";
+            // 
+            // labelNombre
+            // 
+            this.labelNombre.AutoSize = true;
+            this.labelNombre.Location = new System.Drawing.Point(81, 29);
+            this.labelNombre.Name = "labelNombre";
+            this.labelNombre.Size = new System.Drawing.Size(0, 13);
+            this.labelNombre.TabIndex = 13;
+            // 
+            // labelCodigo
+            // 
+            this.labelCodigo.AutoSize = true;
+            this.labelCodigo.Location = new System.Drawing.Point(81, 51);
+            this.labelCodigo.Name = "labelCodigo";
+            this.labelCodigo.Size = new System.Drawing.Size(0, 13);
+            this.labelCodigo.TabIndex = 14;
+            // 
+            // labelMarca
+            // 
+            this.labelMarca.AutoSize = true;
+            this.labelMarca.Location = new System.Drawing.Point(81, 74);
+            this.labelMarca.Name = "labelMarca";
+            this.labelMarca.Size = new System.Drawing.Size(0, 13);
+            this.labelMarca.TabIndex = 15;
+            // 
+            // labelCategoria
+            // 
+            this.labelCategoria.AutoSize = true;
+            this.labelCategoria.Location = new System.Drawing.Point(81, 97);
+            this.labelCategoria.Name = "labelCategoria";
+            this.labelCategoria.Size = new System.Drawing.Size(0, 13);
+            this.labelCategoria.TabIndex = 16;
+            // 
+            // labelPrecio
+            // 
+            this.labelPrecio.AutoSize = true;
+            this.labelPrecio.Location = new System.Drawing.Point(81, 122);
+            this.labelPrecio.Name = "labelPrecio";
+            this.labelPrecio.Size = new System.Drawing.Size(0, 13);
+            this.labelPrecio.TabIndex = 17;
+            // 
+            // lblDescripcion
+            // 
+            this.lblDescripcion.AutoSize = true;
+            this.lblDescripcion.Location = new System.Drawing.Point(348, 74);
+            this.lblDescripcion.Name = "lblDescripcion";
+            this.lblDescripcion.Size = new System.Drawing.Size(0, 13);
+            this.lblDescripcion.TabIndex = 18;
+            // 
+            // labelDescripcion
+            // 
+            this.labelDescripcion.AutoSize = true;
+            this.labelDescripcion.Location = new System.Drawing.Point(267, 74);
+            this.labelDescripcion.Name = "labelDescripcion";
+            this.labelDescripcion.Size = new System.Drawing.Size(66, 13);
+            this.labelDescripcion.TabIndex = 19;
+            this.labelDescripcion.Text = "Descripcion:";
+            // 
             // frmVentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 541);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(983, 552);
+            this.Controls.Add(this.gboxDetalle);
+            this.Controls.Add(this.gBoxBusqueda);
             this.Controls.Add(this.txtFiltroBusqueda);
             this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnBuscar);
@@ -229,8 +367,10 @@
             this.Load += new System.EventHandler(this.frmVentanaPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticulo)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gBoxBusqueda.ResumeLayout(false);
+            this.gBoxBusqueda.PerformLayout();
+            this.gboxDetalle.ResumeLayout(false);
+            this.gboxDetalle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,7 +386,7 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.TextBox txtFiltroBusqueda;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gBoxBusqueda;
         private System.Windows.Forms.ComboBox cboCriterio;
         private System.Windows.Forms.Label lblCriterio;
         private System.Windows.Forms.ComboBox cboCampo;
@@ -254,6 +394,19 @@
         private System.Windows.Forms.Button btnBusquedaAvanzada;
         private System.Windows.Forms.TextBox txtAvanzado;
         private System.Windows.Forms.Label lblFiltroAvanzado;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.GroupBox gboxDetalle;
+        private System.Windows.Forms.Label lblCodigo;
+        private System.Windows.Forms.Label lblMarca;
+        private System.Windows.Forms.Label labelPrecio;
+        private System.Windows.Forms.Label labelCategoria;
+        private System.Windows.Forms.Label labelMarca;
+        private System.Windows.Forms.Label labelCodigo;
+        private System.Windows.Forms.Label labelNombre;
+        private System.Windows.Forms.Label lblPrecio;
+        private System.Windows.Forms.Label lblCategoria;
+        private System.Windows.Forms.Label lblDescripcion;
+        private System.Windows.Forms.Label labelDescripcion;
     }
 }
 

@@ -79,6 +79,13 @@ namespace presentacion
             {
                 Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
                 cargarImagen(seleccionado.UrlImagen);
+
+                labelNombre.Text = seleccionado.Nombre;
+                labelCodigo.Text = seleccionado.CodigoArticulo;
+                labelMarca.Text = seleccionado.Marca.DescripcionMarca;
+                labelCategoria.Text = seleccionado.Categoria.DescripcionCategoria;
+                labelPrecio.Text = seleccionado.Precio.ToString();
+                lblDescripcion.Text = seleccionado.Descripcion;
             }
             
             
